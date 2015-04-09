@@ -28,8 +28,8 @@ public interface SDId {
      * @param userId
      * @param emailAddress
      * @throws EmailAlreadyExists_Exception
-     * @throws InvalidEmail_Exception
      * @throws UserAlreadyExists_Exception
+     * @throws InvalidEmail_Exception
      * @throws InvalidUser_Exception
      */
     @WebMethod
