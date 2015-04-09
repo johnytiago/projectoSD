@@ -1,7 +1,7 @@
-package example.ws.impl;
+package id.ws.impl;
 
 import javax.xml.ws.Endpoint;
-import example.ws.uddi.UDDINaming;
+import id.ws.uddi.UDDINaming;
 
 public class Sd_IdMain {
 
