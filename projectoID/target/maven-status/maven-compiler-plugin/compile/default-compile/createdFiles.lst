@@ -20,6 +20,7 @@ pt/ulisboa/tecnico/sdis/id/ws/package-info.class
 id/ws/impl/Sd_IdImpl.class
 pt/ulisboa/tecnico/sdis/id/ws/InvalidEmail.class
 pt/ulisboa/tecnico/sdis/id/ws/UserDoesNotExist_Exception.class
+id/ws/impl/User.class
 pt/ulisboa/tecnico/sdis/id/ws/RemoveUserResponse.class
 pt/ulisboa/tecnico/sdis/id/ws/UserAlreadyExists.class
 pt/ulisboa/tecnico/sdis/id/ws/InvalidEmail_Exception.class

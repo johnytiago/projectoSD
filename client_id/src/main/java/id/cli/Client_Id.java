@@ -44,7 +44,7 @@ public class Client_Id {
         requestContext.put(ENDPOINT_ADDRESS_PROPERTY, endpointAddress);
 
         System.out.println("Remote call ...");
-        port.removeUser("friend");
+        port.createUser("friend","");
         //System.out.println(result);
     }
 
