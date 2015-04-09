@@ -31,9 +31,9 @@ public class ObjectFactory {
     private final static QName _AuthReqFailed_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "AuthReqFailed");
     private final static QName _RenewPassword_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "renewPassword");
     private final static QName _RemoveUser_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "removeUser");
-    private final static QName _InvalidEmail_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "InvalidEmail");
     private final static QName _RemoveUserResponse_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "removeUserResponse");
     private final static QName _RequestAuthenticationResponse_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "requestAuthenticationResponse");
+    private final static QName _InvalidEmail_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "InvalidEmail");
     private final static QName _EmailAlreadyExists_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "EmailAlreadyExists");
     private final static QName _InvalidUser_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "InvalidUser");
     private final static QName _RequestAuthentication_QNAME = new QName("urn:pt:ulisboa:tecnico:sdis:id:ws", "requestAuthentication");
@@ -55,14 +55,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InvalidEmail }
-     * 
-     */
-    public InvalidEmail createInvalidEmail() {
-        return new InvalidEmail();
-    }
-
-    /**
      * Create an instance of {@link RemoveUserResponse }
      * 
      */
@@ -76,6 +68,14 @@ public class ObjectFactory {
      */
     public RequestAuthenticationResponse createRequestAuthenticationResponse() {
         return new RequestAuthenticationResponse();
+    }
+
+    /**
+     * Create an instance of {@link InvalidEmail }
+     * 
+     */
+    public InvalidEmail createInvalidEmail() {
+        return new InvalidEmail();
     }
 
     /**
@@ -222,15 +222,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InvalidEmail }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "urn:pt:ulisboa:tecnico:sdis:id:ws", name = "InvalidEmail")
-    public JAXBElement<InvalidEmail> createInvalidEmail(InvalidEmail value) {
-        return new JAXBElement<InvalidEmail>(_InvalidEmail_QNAME, InvalidEmail.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link RemoveUserResponse }{@code >}}
      * 
      */
@@ -246,6 +237,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "urn:pt:ulisboa:tecnico:sdis:id:ws", name = "requestAuthenticationResponse")
     public JAXBElement<RequestAuthenticationResponse> createRequestAuthenticationResponse(RequestAuthenticationResponse value) {
         return new JAXBElement<RequestAuthenticationResponse>(_RequestAuthenticationResponse_QNAME, RequestAuthenticationResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InvalidEmail }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:pt:ulisboa:tecnico:sdis:id:ws", name = "InvalidEmail")
+    public JAXBElement<InvalidEmail> createInvalidEmail(InvalidEmail value) {
+        return new JAXBElement<InvalidEmail>(_InvalidEmail_QNAME, InvalidEmail.class, null, value);
     }
 
     /**

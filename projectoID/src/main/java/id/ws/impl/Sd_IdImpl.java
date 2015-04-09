@@ -1,7 +1,7 @@
-package example.ws.impl;
+package id.ws.impl;
 
 import javax.jws.*;
-import example.ws.*; // classes generated from WSDL
+import id.ws.*; // classes generated from WSDL
 import pt.ulisboa.tecnico.sdis.id.ws.*;
 
 @WebService(
