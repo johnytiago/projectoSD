@@ -45,6 +45,29 @@ public class Sd_IdImpl implements SDId {
 	public void createUser(String userId, String emailAddress) 
             throws EmailAlreadyExists_Exception, InvalidEmail_Exception, InvalidUser_Exception, UserAlreadyExists_Exception{
 
+        ////////////////////////////////////Checkar se o email e valido//////////////////////////////////////////
+        int count=0;
+        for (int i = 0; i < emailAddress.length(); i++){
+
+            char c = emailAddress.charAt(i);
+            int ascii = (int)c;
+            if (!((ascii>=65 && ascii<=90) || (ascii>=97 && ascii<=122) ||ascii==46)){
+
+                if(ascii==64 && i!=emailAddress.length()-1 && i!=0 && count==0){
+                    count++;
+                    continue;
+                }
+                System.out.println("caracter "+ count);
+                System.out.println("o email tem caracteres invalidos");
+                break;
+            }   
+
+            
+        }
+        if(count==0){
+            System.out.println("email invalido");
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (User  user: usersLog.values()) {
             if(user._emailAddress.equals(emailAddress)){
                 EmailAlreadyExists faultInfo = new EmailAlreadyExists();
