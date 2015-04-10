@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import java.util.Arrays;
+
 
 
 @WebService(
@@ -44,20 +46,16 @@ public class Sd_IdImpl implements SDId {
             throws EmailAlreadyExists_Exception, InvalidEmail_Exception, InvalidUser_Exception, UserAlreadyExists_Exception{
 
         for (User  user: usersLog.values()) {
-            if(user.emailAddress.equals(emailAddress)){
+            if(user._emailAddress.equals(emailAddress)){
                 EmailAlreadyExists faultInfo = new EmailAlreadyExists();
                 faultInfo.setEmailAddress(emailAddress);
-
-                throw new EmailAlreadyExists_Exception("The EmailAddress: " + emailAddress+ " already exist.\n", faultInfo);
+                throw new EmailAlreadyExists_Exception("The EmailAddress: The email " + emailAddress+ " already exist.\n", faultInfo);
             }
-            if(user.userId.equals(userId)){
+            if(user._userId.equals(userId)){
                 UserAlreadyExists faultInfo = new UserAlreadyExists();
                 faultInfo.setUserId(userId);
-
-                throw new UserAlreadyExists_Exception("The User: " + userId + " already exists.", faultInfo);
-
+                throw new UserAlreadyExists_Exception("The User: The user " + userId + " already exists.", faultInfo);
             }
- 
         }
 
         SecureRandom SECURE_RANDOM = new SecureRandom();
@@ -66,9 +64,6 @@ public class Sd_IdImpl implements SDId {
         usersLog.put(userId, user);
         System.out.println(pass);
     }
-
-
-
 
     public void renewPassword(String userId ) 
             throws UserDoesNotExist_Exception{
@@ -80,7 +75,7 @@ public class Sd_IdImpl implements SDId {
         }
         SecureRandom SECURE_RANDOM = new SecureRandom();
         String hash = new BigInteger(130, SECURE_RANDOM).toString(32);
-        u.password = hash;
+        u._password = hash;
         System.out.println(hash);
     }
 
@@ -107,7 +102,7 @@ public class Sd_IdImpl implements SDId {
         }
 
         /* Verifies if the passwords match */
-        if(u.password.getBytes() != reserved){
+        if(!Arrays.equals(u._password.getBytes(),reserved)){
             AuthReqFailed faultInfo = new AuthReqFailed();
             faultInfo.setReserved(reserved);
             throw new AuthReqFailed_Exception("AUTHENTICATION FAILED: Wrong password.", faultInfo);   

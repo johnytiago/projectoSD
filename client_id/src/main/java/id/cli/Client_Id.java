@@ -30,7 +30,8 @@ public class Client_Id {
         if (endpointAddress == null) {
             System.out.println("Not found!");
             return;
-        } else {
+        }
+        else {
             System.out.printf("Found %s%n", endpointAddress);
         }
 
@@ -46,7 +47,7 @@ public class Client_Id {
         System.out.println("Remote call ...");
         int i=0;
 
-         Scanner keyboardSc;
+        Scanner keyboardSc;
         String name_user;
         String email;
         byte[] reserved;
@@ -61,30 +62,55 @@ public class Client_Id {
                     System.out.println("createUser");
                     System.out.println("UserId?");
                     keyboardSc = new Scanner(System.in);
-                     name_user =keyboardSc.nextLine();
+                    name_user =keyboardSc.nextLine();
 
                     System.out.println("email?");
                     keyboardSc = new Scanner(System.in);
                     email=keyboardSc.nextLine();
-                    port.createUser(name_user,email);
+                    
+                    try{
+                        /* Remote Call */
+                        port.createUser(name_user,email);
+                    }
 
-                     break;
+                    catch(UserAlreadyExists_Exception e){
+                       System.out.println(e.getMessage());
+                    }
+                    catch(EmailAlreadyExists_Exception e){
+                       System.out.println(e.getMessage());
+                    }
+                    break;
+            
             case 2:  
                     System.out.println("renewPassword");
                     System.out.println("UserId?");
                     keyboardSc = new Scanner(System.in);
                     name_user =keyboardSc.nextLine();
-                    port.renewPassword(name_user);
 
-
-                     break;
+                    try{
+                        /* Remote Call */
+                        port.renewPassword(name_user);
+                    }
+                    catch(UserDoesNotExist_Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+            
             case 3:
                     System.out.println("RemoveUser");
                     System.out.println("UserId?");
                     keyboardSc = new Scanner(System.in);
                     name_user =keyboardSc.nextLine();
-                    port.removeUser(name_user);
-                     break;
+                   
+                    try{
+                        /* Remote Call */
+                        port.removeUser(name_user);
+                    }
+                    catch(UserDoesNotExist_Exception e){
+                       System.out.println(e.getMessage());
+                    }
+                    break;
+            
             case 4:
                     System.out.println("requestAuthentication");
                     System.out.println("UserId?");
@@ -94,18 +120,18 @@ public class Client_Id {
                     System.out.println("reserved?");
                     keyboardSc = new Scanner(System.in);
                     reserved =keyboardSc.nextLine().getBytes();
-
+                    try{
                     port.requestAuthentication(name_user,reserved); 
-
-                     break;
+                    }
+                    catch(AuthReqFailed_Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+            
             case 5:  
-                        i=1;
-                     break;
-
-
+                    i=1;
+                    break;
             }
-       
         }
-
     }
 }
