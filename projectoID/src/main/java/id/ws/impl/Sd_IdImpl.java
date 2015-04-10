@@ -39,9 +39,11 @@ public class Sd_IdImpl implements SDId {
     public void renewPassword(String userId ) 
             throws UserDoesNotExist_Exception{
         User u = usersLog.get(userId);
-        if(u == null)
-            //throw new UserDoesNotExist_Exception();
-            System.out.println("got");
+        if(u == null){
+            UserDoesNotExist faultInfo = new UserDoesNotExist();
+            faultInfo.setUserId(userId);
+            throw new UserDoesNotExist_Exception("User does not exist.", faultInfo);
+        }
         else{
             SecureRandom SECURE_RANDOM = new SecureRandom();
             String hash = new BigInteger(130, SECURE_RANDOM).toString(32);
