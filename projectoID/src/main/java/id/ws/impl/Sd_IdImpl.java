@@ -11,6 +11,8 @@ import java.security.SecureRandom;
 
 //hash
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 
@@ -41,12 +43,32 @@ public class Sd_IdImpl implements SDId {
 	public void createUser(String userId, String emailAddress) 
             throws EmailAlreadyExists_Exception, InvalidEmail_Exception, InvalidUser_Exception, UserAlreadyExists_Exception{
 
+        for (User  user: usersLog.values()) {
+            if(user.emailAddress.equals(emailAddress)){
+                EmailAlreadyExists faultInfo = new EmailAlreadyExists();
+                faultInfo.setEmailAddress(emailAddress);
+
+                throw new EmailAlreadyExists_Exception("The EmailAddress: " + emailAddress+ " already exist.\n", faultInfo);
+            }
+            if(user.userId.equals(userId)){
+                UserAlreadyExists faultInfo = new UserAlreadyExists();
+                faultInfo.setUserId(userId);
+
+                throw new UserAlreadyExists_Exception("The User: " + userId + " already exists.", faultInfo);
+
+            }
+ 
+        }
+
         SecureRandom SECURE_RANDOM = new SecureRandom();
         String pass = new BigInteger(130, SECURE_RANDOM).toString(32);
         User user = new User(userId, emailAddress, pass);
         usersLog.put(userId, user);
         System.out.println(pass);
     }
+
+
+
 
     public void renewPassword(String userId ) 
             throws UserDoesNotExist_Exception{
