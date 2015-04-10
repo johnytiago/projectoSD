@@ -44,8 +44,68 @@ public class Client_Id {
         requestContext.put(ENDPOINT_ADDRESS_PROPERTY, endpointAddress);
 
         System.out.println("Remote call ...");
-        port.createUser("friend","");
-        //System.out.println(result);
-    }
+        int i=0;
 
+         Scanner keyboardSc;
+        String name_user;
+        String email;
+        byte[] reserved;
+
+
+        while (i==0){
+            System.out.println("---- WELCOME TO THE REMOTE CALLER ----\n  Please, choose an option: \n  1 - createUser \n  2 - renewPassword \n  3 - removeUser \n  4 - requestAuthentication \n  5 - exit \n--------------------------------------");
+            keyboardSc = new Scanner(System.in);
+            int  input =keyboardSc.nextInt();
+            switch (input) {
+            case 1: 
+                    System.out.println("createUser");
+                    System.out.println("UserId?");
+                    keyboardSc = new Scanner(System.in);
+                     name_user =keyboardSc.nextLine();
+
+                    System.out.println("email?");
+                    keyboardSc = new Scanner(System.in);
+                    email=keyboardSc.nextLine();
+                    port.createUser(name_user,email);
+
+                     break;
+            case 2:  
+                    System.out.println("renewPassword");
+                    System.out.println("UserId?");
+                    keyboardSc = new Scanner(System.in);
+                    name_user =keyboardSc.nextLine();
+                    port.renewPassword(name_user);
+
+
+                     break;
+            case 3:
+                    System.out.println("RemoveUser");
+                    System.out.println("UserId?");
+                    keyboardSc = new Scanner(System.in);
+                    name_user =keyboardSc.nextLine();
+                    port.removeUser(name_user);
+                     break;
+            case 4:
+                    System.out.println("requestAuthentication");
+                    System.out.println("UserId?");
+                    keyboardSc = new Scanner(System.in);
+                    name_user =keyboardSc.nextLine();
+
+                    System.out.println("reserved?");
+                    keyboardSc = new Scanner(System.in);
+                    reserved =keyboardSc.nextLine().getBytes();
+
+                    port.requestAuthentication(name_user,reserved); 
+
+                     break;
+            case 5:  
+                        i=1;
+                     break;
+
+
+            }
+       
+        }
+
+    }
 }
