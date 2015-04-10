@@ -41,10 +41,6 @@ public class Sd_IdImpl implements SDId {
 	public void createUser(String userId, String emailAddress) 
             throws EmailAlreadyExists_Exception, InvalidEmail_Exception, InvalidUser_Exception, UserAlreadyExists_Exception{
 
-        for (User user : usersLog) {
-            
-        }
-
         SecureRandom SECURE_RANDOM = new SecureRandom();
         String pass = new BigInteger(130, SECURE_RANDOM).toString(32);
         User user = new User(userId, emailAddress, pass);
@@ -58,15 +54,12 @@ public class Sd_IdImpl implements SDId {
         if(u == null){
             UserDoesNotExist faultInfo = new UserDoesNotExist();
             faultInfo.setUserId(userId);
-            throw new UserDoesNotExist_Exception("The user: " + userID + " does not exist.", faultInfo);
+            throw new UserDoesNotExist_Exception("The user: " + userId + " does not exist.", faultInfo);
         }
-        else{
-            SecureRandom SECURE_RANDOM = new SecureRandom();
-            String hash = new BigInteger(130, SECURE_RANDOM).toString(32);
-            u.pass = hash;
-            System.out.println(hash);
-            
-        }
+        SecureRandom SECURE_RANDOM = new SecureRandom();
+        String hash = new BigInteger(130, SECURE_RANDOM).toString(32);
+        u.password = hash;
+        System.out.println(hash);
     }
 
     public void removeUser(String userId) 
@@ -77,15 +70,27 @@ public class Sd_IdImpl implements SDId {
             faultInfo.setUserId(userId);
             throw new UserDoesNotExist_Exception("The user you are trying to remove does not exists.", faultInfo);
         }
-        else{
-            usersLog.remove(userId);
-        }
+        usersLog.remove(userId);
     }
 
     public byte[] requestAuthentication(String userId, byte[] reserved)
             throws AuthReqFailed_Exception{
+        
+        /* Verifies if the user exists */
+        User u = usersLog.get(userId);
+        if(u == null){
+            AuthReqFailed faultInfo = new AuthReqFailed();
+            faultInfo.setReserved(reserved);
+            throw new AuthReqFailed_Exception("AUTHENTICATION FAILED: User " + userId +" does not exists.", faultInfo);
+        }
 
-     	return null; 	
+        /* Verifies if the passwords match */
+        if(u.password.getBytes() != reserved){
+            AuthReqFailed faultInfo = new AuthReqFailed();
+            faultInfo.setReserved(reserved);
+            throw new AuthReqFailed_Exception("AUTHENTICATION FAILED: Wrong password.", faultInfo);   
+        }
+     	return "OK".getBytes(); 	
     }
 }
 
