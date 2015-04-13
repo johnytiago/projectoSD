@@ -66,6 +66,9 @@ public class Sd_IdImpl implements SDId {
         }
         if(count==0){
             System.out.println("email invalido");
+            InvalidEmail faultInfo = new InvalidEmail();
+                faultInfo.setEmailAddress(emailAddress);
+                throw new InvalidEmail_Exception("The EmailAddress: The email " + emailAddress+ " is Invalid.\n", faultInfo);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (User  user: usersLog.values()) {

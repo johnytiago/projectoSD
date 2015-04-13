@@ -73,12 +73,10 @@ public class Client_Id {
                         port.createUser(name_user,email);
                     }
 
-                    catch(UserAlreadyExists_Exception e){
-                       System.out.println(e.getMessage());
+                    catch(Exception e){
+                        System.out.println(e.getMessage());
                     }
-                    catch(EmailAlreadyExists_Exception e){
-                       System.out.println(e.getMessage());
-                    }
+                    
                     break;
             
             case 2:  
@@ -91,7 +89,7 @@ public class Client_Id {
                         /* Remote Call */
                         port.renewPassword(name_user);
                     }
-                    catch(UserDoesNotExist_Exception e){
+                    catch(Exception e){
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -106,8 +104,8 @@ public class Client_Id {
                         /* Remote Call */
                         port.removeUser(name_user);
                     }
-                    catch(UserDoesNotExist_Exception e){
-                       System.out.println(e.getMessage());
+                    catch(Exception e){
+                        System.out.println(e.getMessage());
                     }
                     break;
             
@@ -123,7 +121,7 @@ public class Client_Id {
                     try{
                     port.requestAuthentication(name_user,reserved); 
                     }
-                    catch(AuthReqFailed_Exception e){
+                    catch(Exception e){
                         System.out.println(e.getMessage());
                     }
                     break;
