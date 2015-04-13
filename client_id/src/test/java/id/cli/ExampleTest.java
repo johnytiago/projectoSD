@@ -50,15 +50,96 @@ public class ExampleTest {
 
     // tests
 
+
     @Test
-    public void test() {
-        
+    public void test01() {
+       System.out.println("1");
+        String test="";
+        String output="";
         try {
-        port.createUser("","zewrlkgkler@gmail.com");
+       	
+        port.createUser("paulo","fabio@gmail.com");
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+           e.getMessage();
         }
+         assertEquals(test,output);
+        
     }
+
+	@Test
+    public void test02() {
+    	System.out.println("2");
+        String test="The User: The user " + "paulo" + " already exists.";
+        String output="";
+        try {
+       	
+        port.createUser("paulo","toni@gmail.com");
+        
+        }
+        catch(Exception p){
+           output=p.getMessage();
+        }
+        assertEquals(test,output);
+    }
+
+    @Test
+    public void test03() {
+    	System.out.println("3");
+        String test="The EmailAddress: The email @gmail.com is Invalid.";
+        String output="";
+        try {
+       	
+        port.createUser("joao","@gmail.com");
+
+        
+        }
+        catch(Exception p){
+           output=p.getMessage();
+        }
+        assertEquals(test,output);
+    }
+
+
+      @Test
+    public void test04() {
+    	System.out.println("4");
+        String test="The EmailAddress: The email gmail@ is Invalid.";
+        String output="";
+        try {
+       	
+        port.createUser("joao","gmail@");
+
+        
+        }
+        catch(Exception p){
+           output=p.getMessage();
+        }
+        assertEquals(test,output);
+    }
+
+      @Test
+    public void test05() {
+       System.out.println("5");
+        String test="";
+        String output="";
+        try {
+       	
+        port.createUser("ze","fabio@gmail.com");
+        }
+        catch(Exception e){
+           e.getMessage();
+        }
+         assertEquals(test,output);
+        
+    }
+
+
+
+
+    
+    
+
+
 
 }

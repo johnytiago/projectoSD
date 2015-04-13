@@ -57,25 +57,44 @@ public class Sd_IdImpl implements SDId {
                     count++;
                     continue;
                 }
-                System.out.println("caracter "+ count);
-                System.out.println("o email tem caracteres invalidos");
-                break;
+                 System.out.println("email invalido");
+                 InvalidEmail faultInfo = new InvalidEmail();
+                 faultInfo.setEmailAddress(emailAddress);
+                 throw new InvalidEmail_Exception("The EmailAddress: The email " + emailAddress+ " is Invalid.", faultInfo);
+       
+                
             }   
 
             
         }
         if(count==0){
             System.out.println("email invalido");
-            InvalidEmail faultInfo = new InvalidEmail();
-                faultInfo.setEmailAddress(emailAddress);
-                throw new InvalidEmail_Exception("The EmailAddress: The email " + emailAddress+ " is Invalid.\n", faultInfo);
+            InvalidUser faultInfo = new InvalidUser();
+                faultInfo.setUserId(userId);
+                throw new InvalidUser_Exception("The EmailAddress: The email " + emailAddress+ " is Invalid.", faultInfo);
         }
+
+
+
+        if (userId==null || userId.equals("")){
+            InvalidEmail faultInfo = new InvalidEmail();
+                 faultInfo.setEmailAddress(emailAddress);
+                 throw new InvalidEmail_Exception("The userId: The user " + userId+ " is Invalid.", faultInfo);
+
+
+        }
+
+
+
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (User  user: usersLog.values()) {
             if(user._emailAddress.equals(emailAddress)){
+                System.out.println("email repetido->"+ emailAddress);
+
                 EmailAlreadyExists faultInfo = new EmailAlreadyExists();
                 faultInfo.setEmailAddress(emailAddress);
-                throw new EmailAlreadyExists_Exception("The EmailAddress: The email " + emailAddress+ " already exist.\n", faultInfo);
+                throw new EmailAlreadyExists_Exception("The EmailAddress: The email " + emailAddress+ " already exist.", faultInfo);
             }
             if(user._userId.equals(userId)){
                 UserAlreadyExists faultInfo = new UserAlreadyExists();
@@ -83,6 +102,8 @@ public class Sd_IdImpl implements SDId {
                 throw new UserAlreadyExists_Exception("The User: The user " + userId + " already exists.", faultInfo);
             }
         }
+
+        System.out.println("email ->"+ emailAddress);
 
         SecureRandom SECURE_RANDOM = new SecureRandom();
         String pass = new BigInteger(130, SECURE_RANDOM).toString(32);
