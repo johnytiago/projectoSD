@@ -57,7 +57,7 @@ public class Sd_IdImpl implements SDId {
                     count++;
                     continue;
                 }
-                 System.out.println("email invalido");
+                 
                  InvalidEmail faultInfo = new InvalidEmail();
                  faultInfo.setEmailAddress(emailAddress);
                  throw new InvalidEmail_Exception("The EmailAddress: The email " + emailAddress+ " is Invalid.", faultInfo);
@@ -68,7 +68,7 @@ public class Sd_IdImpl implements SDId {
             
         }
         if(count==0){
-            System.out.println("email invalido");
+            
             InvalidUser faultInfo = new InvalidUser();
                 faultInfo.setUserId(userId);
                 throw new InvalidUser_Exception("The EmailAddress: The email " + emailAddress+ " is Invalid.", faultInfo);
@@ -90,7 +90,7 @@ public class Sd_IdImpl implements SDId {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (User  user: usersLog.values()) {
             if(user._emailAddress.equals(emailAddress)){
-                System.out.println("email repetido->"+ emailAddress);
+                
 
                 EmailAlreadyExists faultInfo = new EmailAlreadyExists();
                 faultInfo.setEmailAddress(emailAddress);
@@ -103,7 +103,7 @@ public class Sd_IdImpl implements SDId {
             }
         }
 
-        System.out.println("email ->"+ emailAddress);
+        
 
         SecureRandom SECURE_RANDOM = new SecureRandom();
         String pass = new BigInteger(130, SECURE_RANDOM).toString(32);
@@ -154,7 +154,11 @@ public class Sd_IdImpl implements SDId {
             faultInfo.setReserved(reserved);
             throw new AuthReqFailed_Exception("AUTHENTICATION FAILED: Wrong password.", faultInfo);   
         }
-     	return "OK".getBytes(); 	
+        boolean vIn = true;
+        byte [] vOut = new byte[]{(byte) (vIn?1:0)};
+
+
+     	return vOut; 	
     }
 }
 

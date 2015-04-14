@@ -5,7 +5,7 @@
 /Library/Tomcat/bin/shutdown.sh --> to shutdown toomcat
 
 
-mac we have to run: JAVA_HOME="`/usr/libexec/java_home -v '1.8*'`"
+mac we have to run: export JAVA_HOME="`/usr/libexec/java_home -v '1.8*'`"
 
 
 mvn clean
