@@ -126,11 +126,30 @@ public class ExampleTest {
         assertEquals(test,output);
     }
 
-    //tentativa de registo de um user com um email já existente 
+    //tentativa de registo de user com um email invalido
     //e e esperado que uma excepcao seja lancada
       @Test
     public void test05() {
-       System.out.println("5");
+        System.out.println("5");
+        String test="The EmailAddress: The email gmail is Invalid.";
+        String output="";
+        try {
+        
+        port.createUser("joao","gmail");
+
+        
+        }
+        catch(Exception p){
+           output=p.getMessage();
+        }
+        assertEquals(test,output);
+    }
+
+    //tentativa de registo de um user com um email já existente 
+    //e e esperado que uma excepcao seja lancada
+      @Test
+    public void test06() {
+       System.out.println("6");
         String test="The EmailAddress: The email " + "fabio@gmail.com"+ " already exist.";
         String output="";
         try {
@@ -147,8 +166,8 @@ public class ExampleTest {
     //testa uma tentativa de registo de um user sem nome ""
     //e e esperado que uma excepcao seja lancada
      @Test
-    public void test06() {
-       System.out.println("6");
+    public void test07() {
+       System.out.println("7");
         String test="The userId: The user " + ""+ " is Invalid.";
         String output="";
         try {
@@ -161,11 +180,32 @@ public class ExampleTest {
          assertEquals(test,output);
         
     }
+    
+    //testa uma tentativa de registo de um user null
+    //e e esperado que uma excepcao seja lancada
+     @Test
+    public void test08() {
+       System.out.println("8");
+        String test="The userId: The user null is Invalid.";
+        String output="";
+        try {
+        
+        port.createUser(null,"susana@gmail.com");
+        }
+        catch(Exception e){
+           output=e.getMessage();
+        }
+         assertEquals(test,output);
+        
+    }
+
+
+
     //pede-se uma nova pass a um user registado anteriormente 
     //e nao e esperado que uma excepcao seja lancada
        @Test
-    public void test07() {
-       System.out.println("7");
+    public void test09() {
+       System.out.println("9");
         String test="";
         String output="";
         try {
@@ -182,8 +222,8 @@ public class ExampleTest {
     // tentativa de remover um user que nao existe 
     //e e esperado que uma excepcao seja lancada
     @Test
-    public void test08() {
-       System.out.println("8");
+    public void test10() {
+       System.out.println("10");
         String test="The user: " + "fabiana" + " does not exist.";
         String output="";
         try {
@@ -200,8 +240,8 @@ public class ExampleTest {
     //remove um user que existe
     //e nao e esperado que uma excepcao seja lancada
          @Test
-    public void test09() {
-       System.out.println("9");
+    public void test11() {
+       System.out.println("11");
         String test="";
         String output="";
         try {
@@ -215,11 +255,29 @@ public class ExampleTest {
         
     }
 
+    //remove um user que nao existe
+    //e e esperado que uma excepcao seja lancada
+         @Test
+    public void test12() {
+       System.out.println("12");
+        String test="The user you are trying to remove does not exists.";
+        String output="";
+        try {
+        
+        port.removeUser("francisco");
+        }
+        catch(Exception e){
+           output=e.getMessage();
+        }
+         assertEquals(test,output);
+        
+    }
+
     //teste em que se pede uma autenticação 
     //e e esperado que uma excepcao seja lancada
     @Test
-    public void test10() {
-        System.out.println("10");
+    public void test13() {
+        System.out.println("13");
         boolean test = true;
         boolean output=false;
 
@@ -244,8 +302,8 @@ public class ExampleTest {
     //teste em que se pede uma autenticação com uma pass errada
     //e e esperado que uma excepcao seja lancada
     @Test
-    public void test11() {
-        System.out.println("11");
+    public void test14() {
+        System.out.println("14");
         String test ="AUTHENTICATION FAILED: Wrong password." ;
         String output="";
 
@@ -264,11 +322,11 @@ public class ExampleTest {
         
     }
 
-     //teste em que se pede uma autenticação com um user errado
+    //teste em que se pede uma autenticação com um user errado
     //e e esperado que uma excepcao seja lancada
     @Test
-    public void test12() {
-        System.out.println("12");
+    public void test15() {
+        System.out.println("15");
         String test ="AUTHENTICATION FAILED: User " + "alic" +" does not exists.";
         String output="";
 
